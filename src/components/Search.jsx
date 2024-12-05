@@ -1,20 +1,28 @@
 /* eslint-disable react/prop-types */
 
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchSvg from "../Svg/SearchSvg";
 import useDebounce from "../hooks/useDebounce";
 
 function Search({ searchTerm, setSearchTerm }) {
-  // const [inputValue,searchInputValue] = useState(searchTerm)
-  const doSearch = useDebounce((term) => {
-    setSearchTerm(term);
-  }, 500);
+  const [inputValue, setInputValue] = useState(searchTerm);
+
+  const debouncedSearchTerm = useDebounce(inputValue, 500);
 
   function handleChange(e) {
-    const value = e.target.value;
-    doSearch(value);
+    setInputValue(e.target.value);
   }
+
+  useEffect(() => {
+    setSearchTerm(debouncedSearchTerm);
+  }, [debouncedSearchTerm, setSearchTerm]);
+
+  useEffect(() => {
+    setInputValue(searchTerm);
+  }, [searchTerm]);
+
   console.log(searchTerm);
+
   return (
     <div className="flex flex-1 items-center px-3.5 py-2 text-gray-400 group hover:ring-1 hover:ring-gray-300 focus-within:!ring-2 ring-inset focus-within:!ring-teal-500 rounded-md">
       <SearchSvg />
@@ -26,7 +34,7 @@ function Search({ searchTerm, setSearchTerm }) {
         type="search"
         aria-expanded="false"
         aria-autocomplete="list"
-        // value={searchTerm}
+        value={inputValue}
         onChange={handleChange}
         style={{ caretColor: "rgb(107, 114, 128)" }}
       />

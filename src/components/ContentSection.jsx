@@ -16,6 +16,7 @@ function ContentSection() {
   const { data, loading, error } = useFakeStore(url);
   const [cartItems, setCartItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm);
   
 
   let sortedProducts;
@@ -58,7 +59,7 @@ function ContentSection() {
                 {/* <!-- Sort & Filter--> */}
                 <div className="w-full">
                   <Sort sortOption={sortOption} setSortOption={setSortOption} />
-                  <Filter searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                  <Filter  setSearchTerm={setSearchTerm} />
                 </div>
                 {/* <!-- Search and Cart --> */}
                 <div className="flex gap-2 items-center">

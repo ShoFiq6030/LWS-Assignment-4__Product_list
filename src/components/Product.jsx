@@ -22,7 +22,7 @@ function Product({ item }) {
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none lg:h-80">
         <img
           src={item.image}
-          alt="Front of men&#039;s Basic Tee in black."
+          alt="Front of mens Basic Tee in black."
           className="h-full w-full object-cover object-top lg:h-full lg:w-full p-4 bg-gray-100"
         />
       </div>
