@@ -1,5 +1,6 @@
 
-function CartSvg() {
+function CartSvg({ hight,weight}) {
+  // console.log(hight);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,7 +8,7 @@ function CartSvg() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="mr-2.5 h-5 w-5 flex-none stroke-slate-400"
+      className={`mr-2.5 h-${hight} w-${weight} flex-none stroke-slate-400`}
     >
       <path
         strokeLinecap="round"

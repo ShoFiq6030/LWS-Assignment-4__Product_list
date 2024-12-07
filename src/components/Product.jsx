@@ -1,19 +1,22 @@
-/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import CartSvg from "../Svg/CartSvg";
-import { ProductsContext } from "../context/productsContext";
+import { CartContext } from "../context/cartContext";
 
 function Product({ item }) {
-  const { handleCardAdd, removeFromCart, cartItems } =
-    useContext(ProductsContext);
+  const { cartItems, dispatch } = useContext(CartContext);
 
   const isInCart = cartItems.some((cartItem) => cartItem.id === item.id);
 
   const handleButtonClick = () => {
+    // console.log(item);
     if (isInCart) {
-      removeFromCart(item.id);
+      // Show confirmation alert
+    if (window.confirm("Are you sure you want to remove this item from the cart?")) {
+      // Dispatch the action to remove the item
+      dispatch({ type: "REMOVE_FROM_CART", itemId: item.id});
+    };
     } else {
-      handleCardAdd(item);
+      dispatch({ type: "ADD_TO_CART", item });
     }
   };
 
@@ -26,7 +29,7 @@ function Product({ item }) {
           className="h-full w-full object-cover object-top lg:h-full lg:w-full p-4 bg-gray-100"
         />
       </div>
-      <div className="mt-4 px-3 pb-4">
+      <div className="my-10 px-3 pb-4">
         <div>
           <h3 className="text-sm text-gray-700">{item.title}</h3>
           <p className="mt-1 text-sm text-gray-500">{item.category}</p>
@@ -45,7 +48,7 @@ function Product({ item }) {
           className="flex px-3 py-2 justify-center"
           onClick={handleButtonClick}
         >
-          <CartSvg />
+          <CartSvg hight={5} weight={5} />
           {isInCart ? "Remove from Cart" : "Add to Cart"}
         </div>
       </div>
